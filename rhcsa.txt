@@ -2,7 +2,15 @@ Example Exam 1:
 1. Assuming the root user password is lost for C1 and your system is running in multiuser.target with no current root session open.
 	boot your system into an appropriate target and chage the root user password to root1234
 Solution:
-
+		1] In the GRUB boot menu, press e on your current OS to modify its settings.
+		2] Search the line which starts with "linux" and edit it deleting the words "quiet" and "rhgb", also append 			"init=/bin/sh" at the end of this same line.
+		3] Press the combination "Ctrl+X" to reboot the system using the specified options.
+		4] In the new shell, load the installed SELinux policies with the command "/usr/sbin/load_policy -i"
+		5] Remount the filesystem in rw mode with "mount -o remount,rw /"
+		6] Finally issue the "passwd root" command and modify the root password as you like.
+		7] Remount the filesystem in read-only mode with "mount -o remount,ro /"
+		8] Finally reboot your system with "exec /sbin/init 6"
+		9] Login to the system with the new password.
 
 2. Configure the primary network interface with hostname c1.home.local (alias rhcsa1)
 	IP 192.168.0.121/24
@@ -13,4 +21,4 @@ Solution:
 4. set SELinux to enforcing mode
 5. perform a case insensitive search for the pattern "then" in the /etc/prifile and save the result in the 
 	/var/tmp/pattern.txt.
-   Make sure that empty lines are not included
+   Make sure that empty lines are not included 
