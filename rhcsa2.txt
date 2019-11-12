@@ -1,0 +1,16 @@
+6. Activate and start firewalld
+solution:
+
+7. Set the primary command prompt for the user root to diplay the hostname, username, and current directory
+solution:
+
+8. Create users sam, tom, steve,bob and anna with home directories in /home.
+	set their passwords to user123 and make accounts tom and sam to ecxpire on june 31 2019
+	users steve and bobshould have their secondary groups set to group tech
+solution:
+
+9. create directory called dir1: as user anna in her home directory and set default acl on it for user sam for read and write access
+solution:
+
+10. setup a local repo for the remote ftp yum repository in the /pub/ direcory on s1 (s1 ip is 192.168.0.120)
+solution:
