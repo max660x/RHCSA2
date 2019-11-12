@@ -1,0 +1,19 @@
+11. Create a logical Volume called lv01 of size equals to 15 LEs in vg01 volume Group
+	(create vg01 with PE size of 16MB) with mount point in /mnt/dirxfs and xfs filesystem structures
+	create a file called testxfs1 in the mount point. Set the filesystem to automaticall mount at eahe system reboot
+solution:
+
+12. add a group called tester and change group membershiip on /mnt/dirxfs1/ to tester
+	set rwx permissions on /mnt/dirxfs1 for the owneer and group members no permissions for others
+solution;
+
+13. extend lv01 filesystem in vg01 online by 105MB without losing any data
+solution;
+
+14. create a swap partition of size of 200mb on an available disk. use its uuid and ensure it is 
+	activated after every system reboot
+solution:
+
+15. create a standard partiotion of size 500MB on any available disk and format it with ext4 filesystem structures
+	mount the filesystem on /mnt/dirext4 persistintly using its uuid. creat a file caled textext4 in the mountpoint
+solution:

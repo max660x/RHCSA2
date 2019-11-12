@@ -1,0 +1,9 @@
+16. create a directory /dir1 and apply SELinux context for /root on it
+solution:
+17. setup a cron job as the root user to execute the backup script which is located unde the root home directory.
+	this job should run every sunday at 1:00 aM
+solution:
+18. use star to crate a compressed archive of the /etc directory store the archive in /root using any name
+solution:
+19. enable at access for user sam and deny for user bob
+20. modify the bootloader and set the default autoboot timer value to 30 seconds
