@@ -37,6 +37,10 @@ Solution:
 		3] Verify that you have succeeded in the process with "ls -l /etc/systemd/system/default.target"(you should see a 		  symbolic link to the multi-user.target file)
 		
 4. Set SELinux to enforcing mode
+Solution: 
+	1. Show the current status with sestatus
+	2. Setenforce enforcing
+	3. To make it permanent edit with vi /etc/sysconfig/selinux then SELINUX=enforcing
 5. Perform a case insensitive search for the pattern "then" in the /etc/profile and save the result in the 
 /var/tmp/pattern.txt.
 Make sure that empty lines are not included 
