@@ -49,6 +49,9 @@ Solution:
 		3] Check your result with "cat /var/tmp/pattern.txt" 
 		
 6. Activate and start firewalld
+	1. Systemctl enable firewalld                #use --now option on rhel
+	2. Systemctl start firewalld		     #use --now option on rhel
+	
 7. Set the primary command prompt for user root to display the hostname, username, and current working directory information in that order
 Solution:
 		1] To avoid any mistake, let's backup the ~/.bashrc file with "cp ~/.bashrc ~/.bashrc.backup"
@@ -56,7 +59,11 @@ Solution:
 		3] Let's add at the end of the file the line "export "PS1=h\u@\w> ""
 		4] Issue the command "source ~/.bashrc" to apply those changes
 	
-8. Create users barry, harry, larry, marry and gary with home directories in /home. Set their passwords to Temp123$ and make accounts for mary and barry expire on December 31, 2017. Users larry and gary should have their secondary groups seto to group dba (create this group if it does not exist)
+8. Create users barry, harry, larry, marry and gary with home directories in /home. Set their passwords to Temp123$ and make accounts for mary and barry expire on December 31, 2017. Users larry and gary should have their secondary groups set to to group dba (create this group if it does not exist)
+	1. useradd -m -e YYYY-MM-DD -p PASSWORD username.             # use -u UID to use a uid useful for later exercises -m is used to specify the creation of a home directory
+	2. groupadd GROUPNAME					      # use -g to assign a GID
+	3. Useradd -G GROUPNAME	username			      # usermod -a -G GROUPNAME USERNAME to add the user to the specified group
+								      # usermod -g GROUPNAME to assign to logged user a primary group 
 9. Create a directory called testdir2 as user mary in her home directory and set default ACLs on it for user barry for read and write access.
 Solution:
 		1] Let's switch to user mary with "su mary" (if the user exists) and move to its home directory with "cd ~"
@@ -65,6 +72,7 @@ Solution:
 		4] We can now set the acl with "aetfacl -m u:UID(visto prima):/home/mary/testdir2"
 		5] To check if the ACL are active you can use "getfacl /home/mary/testdir2"
 10. Set up a FTP yum repository in the /var/ftp/pub/rhel7 directory on hv1, and configure a repo on rhcsal
+
 11. Create a logical volume called linuxadm of size equal to 10 LEs in vgtest volume group (create vgtest with PE size 32MB) with mount point /mnt/linuxadm and xfs file system structures. Create a file called linuxadminfile in the mount point. Set the file system to automatically mount at each system reboot.
 Solution: 
 		1] 
