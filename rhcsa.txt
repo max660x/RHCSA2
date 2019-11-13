@@ -37,10 +37,6 @@ Solution:
 		3] Verify that you have succeeded in the process with "ls -l /etc/systemd/system/default.target"(you should see a 		  symbolic link to the multi-user.target file)
 		
 4. Set SELinux to enforcing mode
-Solution: 
-	1. Show the current status with sestatus
-	2. Setenforce enforcing
-	3. To make it permanent edit with vi /etc/sysconfig/selinux then SELINUX=enforcing
 5. Perform a case insensitive search for the pattern "then" in the /etc/profile and save the result in the 
 /var/tmp/pattern.txt.
 Make sure that empty lines are not included 
@@ -56,5 +52,28 @@ Solution:
 		2] Now, we open the config file with "vi ~/.bashrc"
 		3] Let's add at the end of the file the line "export "PS1=h\u@\w> ""
 		4] Issue the command "source ~/.bashrc" to apply those changes
+	
+8. Create users barry, harry, larry, marry and gary with home directories in /home. Set their passwords to Temp123$ and make accounts for mary and barry expire on December 31, 2017. Users larry and gary should have their secondary groups seto to group dba (create this group if it does not exist)
+9. Create a directory called testdir2 as user mary in her home directory and set default ACLs on it for user barry for read and write access.
+Solution:
+		1] Let's switch to user mary with "su mary" (if the user exists) and move to its home directory with "cd ~"
+		2] Let's create the directory with "mkdir testdir2"
+		3] We will need barry's UID to set ACLs, we can do this by using the command "less /etc/passwd", the third field 		 of each entry is the UID of the selected user, we need to remember barry's UID
+		4] We can now set the acl with "aetfacl -m u:UID(visto prima):/home/mary/testdir2"
+		5] To check if the ACL are active you can use "getfacl /home/mary/testdir2"
+10. Set up a FTP yum repository in the /var/ftp/pub/rhel7 directory on hv1, and configure a repo on rhcsal
+11. Create a logical volume called linuxadm of size equal to 10 LEs in vgtest volume group (create vgtest with PE size 32MB) with mount point /mnt/linuxadm and xfs file system structures. Create a file called linuxadminfile in the mount point. Set the file system to automatically mount at each system reboot.
+Solution: 
+		1] 
 		
-		
+12. Add a group called linuxadmin and change group membership on /mnt/linuxadm to linuxadmin. Set read/write/execute permissions on /linuxadm for the owner and group members, and no permissions for others.
+13. Extend linuxadm file system in vgtest online by 35 MB without losing any data
+14. Create a swap partition of size 65 MB on an available disk. Use its UUID and ensure it is activated after every system reboot.
+15. Create a standard partition of size 60 MB on any available disk and format it with ext4 file system structures. Mount the file system on /mnt/stdext persistently using its UUID. Create a file called stdextfile in the mount point
+16. Create a directory /direct01 and apply SELinux contexts for /root on it
+		1] Create the directory with "mkdir direct01"
+		2] Check its SELinux context with ls -dZ /direct01
+		3] Check /root's SELinux context with ls -dZ /root
+		4] We can now copy /root's SELinux context with "chcon --reference=/root /direct01"
+		5] Let's check the SELinux context for both directories to see if they match
+	
