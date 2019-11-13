@@ -34,6 +34,7 @@ Solution:
 3. Set default boot target to multiuser
 4. set SELinux to enforcing mode
 Solution:
+
 5. perform a case insensitive search for the pattern "then" in the /etc/prifile and save the result in the 
 	/var/tmp/pattern.txt.
    Make sure that empty lines are not included 
