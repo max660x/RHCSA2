@@ -1,40 +1,43 @@
 Example Exam 1:
 1. Assuming the root user password is lost for C1 and your system is running in multiuser.target with no current root session open.
-	boot your system into an appropriate target and chage the root user password to root1234
+Boot your system into an appropriate target and chage the root user password to root1234
 Solution:
-		1] In the GRUB boot menu, press e on your current OS to modify its settings.
-		2] Search the line which starts with "linux" and edit it deleting the words "quiet" and "rhgb", also append 			"init=/bin/sh" at the end of this same line.
+		1] In the GRUB boot menu, press e on your current OS to modify its settings
+		2] Search the line which starts with "linux" and edit it deleting the words "quiet" and "rhgb", also append 			"init=/bin/sh" at the end of this same line
 		3] Press the combination "Ctrl+X" to reboot the system using the specified options.
 		4] In the new shell, load the installed SELinux policies with the command "/usr/sbin/load_policy -i"
 		5] Remount the filesystem in rw mode with "mount -o remount,rw /"
-		6] Finally issue the "passwd root" command and modify the root password as you like.
+		6] Finally issue the "passwd root" command and modify the root password as you like
 		7] Remount the filesystem in read-only mode with "mount -o remount,ro /"
 		8] Finally reboot your system with "exec /sbin/init 6"
-		9] Login to the system with the new password.
+		9] Login to the system with the new password
 
 2. Configure the primary network interface with hostname c1.home.local (alias rhcsa1)
 	IP 192.168.0.121/24
 	gtw 192.168.0.1/24
 	dns 192.168.0.1/24
 Solution:
-	1. "ifconfig" or "ip a" to show which interface you need to modify
-	2. vi to /etc/sysconfig/network-scripts/ifcfg-INTERFACENAME
-	3. Edit the file according the following:
-		BOOTPROTO=STATIC
-		ONBOOT=YES
-		IPADDR= 192.168.0.121
-		NETMASK= 255.255.255.0
-		GATEWAY= 192.168.0.1
-	4. then systemctl restart network
-	5. vi to /etc/resolv.conf
-		nameserver 192.168.0.1
-	6. to test it try to ping something with a name
-	
-
 3. Set default boot target to multiuser
-4. set SELinux to enforcing mode
 Solution:
-
-5. perform a case insensitive search for the pattern "then" in the /etc/prifile and save the result in the 
-	/var/tmp/pattern.txt.
-   Make sure that empty lines are not included 
+		1] Check the actual default target with "systemctl get-default"
+		2] Change the default target issuing the command "systemctl set-default multi-user.target"
+		3] Verify that you have succeeded in the process with "ls -l /etc/systemd/system/default.target"(you should see a 		  symbolic link to the multi-user.target file)
+		
+4. Set SELinux to enforcing mode
+5. Perform a case insensitive search for the pattern "then" in the /etc/profile and save the result in the 
+/var/tmp/pattern.txt.
+Make sure that empty lines are not included 
+Solution: 
+		1] To start off, you should perform a case-insensitive search and redirect the output to the second file. To do 		this, launch the command "touch /var/tmp/pattern.txt", then create the pipeline "cat /etc/profile | grep -i then                   		   > /var/tmp/pattern.txt"	
+		2] We can then use sed to erase all blank lines from the file with the command "sed -i '/^$/d' /var/tmp			        /pattern.txt"
+		3] Check your result with "cat /var/tmp/pattern.txt" 
+		
+6. Activate and start firewalld
+7. Set the primary command prompt for user root to display the hostname, username, and current working directory information in that order
+Solution:
+		1] To avoid any mistake, let's backup the ~/.bashrc file with "cp ~/.bashrc ~/.bashrc.backup"
+		2] Now, we open the config file with "vi ~/.bashrc"
+		3] Let's add at the end of the file the line "export "PS1=h\u@\w> ""
+		4] Issue the command "source ~/.bashrc" to apply those changes
+		
+		
