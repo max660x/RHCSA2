@@ -79,4 +79,10 @@ Solution:
 		3] Check /root's SELinux context with ls -dZ /root
 		4] We can now copy /root's SELinux context with "chcon --reference=/root /direct01"
 		5] Let's check the SELinux context for both directories to see if they match
+17. Set up a cron job as the root user to search for core files in the /var directory and list them in /var/log/corefiles. This job should run every Monday at 1:20am system time.  
+		1] We start by creating the file in which the script should work with "touch /var/log/corefiles"
+		2] We run crontab -l to check if there is any chrond jobs active
+		3] We issue the command "crontab -u root -e" to edit root's chrond routine
+		4] We add the line "20 1 * * 1 find /var -name core > /var/log/corefiles" and save our configuration
+		5] We check if the job has been scheduled with "crontab -l"
 	
