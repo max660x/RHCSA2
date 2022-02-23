@@ -82,15 +82,25 @@ Solution:
 14. Create a swap partition of size 65 MB on an available disk. Use its UUID and ensure it is activated after every system reboot.
 15. Create a standard partition of size 60 MB on any available disk and format it with ext4 file system structures. Mount the file system on /mnt/stdext persistently using its UUID. Create a file called stdextfile in the mount point
 16. Create a directory /direct01 and apply SELinux contexts for /root on it
+Solution:
 		1] Create the directory with "mkdir direct01"
 		2] Check its SELinux context with ls -dZ /direct01
 		3] Check /root's SELinux context with ls -dZ /root
 		4] We can now copy /root's SELinux context with "chcon --reference=/root /direct01"
 		5] Let's check the SELinux context for both directories to see if they match
-17. Set up a cron job as the root user to search for core files in the /var directory and list them in /var/log/corefiles. This job should run every Monday at 1:20am system time.  
+17. Set up a cron job as the root user to search for core files in the /var directory and list them in /var/log/corefiles. This job should run every Monday at 1:20am system time
+Solution:
 		1] We start by creating the file in which the script should work with "touch /var/log/corefiles"
 		2] We run crontab -l to check if there is any chrond jobs active
 		3] We issue the command "crontab -u root -e" to edit root's chrond routine
 		4] We add the line "20 1 * * 1 find /var -name core > /var/log/corefiles" and save our configuration
 		5] We check if the job has been scheduled with "crontab -l"
-	
+18. Use star and gzip to create a compressed archive of the /usr/local directory. Store the archive in /root using any name of your choice
+19. Enable at access for user barry and deny for user gary
+Solution:
+		1] To restrict at access we need to search for the configuration file with "ls -la /etc | grep at.*"
+		2] If we find the at.allow file, we add "barry" as plain text to it (use vim)
+		3] If we find the at.deny file, we add "gary" as plain text to it (use vim)
+		4] We can check if everything worked properly by switching user with "su -" and by issuing the "at" command
+		
+20. Modify the bootloader and set the default autoboot timer value to 2 seconds 
